@@ -1,1 +1,37 @@
+import ftrobopy
+import time
+import numpy
 
+#Inutile
+__author__= "Tomelin Michele"
+__version__= "Alpha 0.1"
+__status__= "In development"
+__date__= "23/11/2019"
+
+#Connessione al controller
+USB = '192.168.7.2'
+txt = ftrobopy.ftrobopy('auto')
+
+mot_alz_dx=1 #motore dx
+mot_alz_sx=2 #motore sx
+
+mot_int= 3
+mot_est= 4
+
+lamp_rossa=5
+lamp_verde=6
+
+lamp_pareggio=3 #arancio
+
+lamp_vince_robot=1 #bianca sx 
+lamp_vince_umano=2 #bianca dx
+
+tasto_vince_robot=7
+tasto_vince_umano=8
+
+
+#Dichiarazione
+motoreInterno = txt.motor(mot_int)
+motoreEsterno = txt.motor(mot_est)
+motoreAlzataDx = txt.motor(mot_alz_dx)
+motoreAlzataSx = txt.motor(mot_alz_sx)
