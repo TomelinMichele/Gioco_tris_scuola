@@ -1,6 +1,6 @@
 # Progetto scuola Tris
 Questo è il programma realizzato in python con l'utilizzo della libreria ftrobopy.
-Questo sw è stato implementato al fine di comandare un robot realizzato con pezzi della Fisher
+Obiettivo: questo sw è stato implementato con lo scopo di far funzionare un robot scara realizzato con pezzi della FisherTechnik
 e un doppio controllo txt 
 > Controller txt destro = Master
 >
