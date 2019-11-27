@@ -1,10 +1,15 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import ftrobopy
 import time
 import numpy
 
 #Inutile
 __author__= "Tomelin Michele"
-__version__= "Alpha 0.1"
+__maintainer__ = "Tomelin Michele"
+__email__ = "tomelinmichele@gmail.com"
+__version__= "1"
 __status__= "In development"
 __date__= "23/11/2019"
 
@@ -12,8 +17,9 @@ __date__= "23/11/2019"
 USB = '192.168.7.2'
 txt = ftrobopy.ftrobopy('auto')
 
-#Controller dx= master = M
-#Controller sx= master = E
+# Dove sono collegate le varie componenti??
+    #Controller dx= master = M
+    #Controller sx= master = E
 
 # mot= motore
 
@@ -85,4 +91,14 @@ fotocellula_pos23 = txt.input(fot_23)
 fotocellula_pos31 = txt.input(fot_31)
 fotocellula_pos32 = txt.input(fot_32)
 fotocellula_pos33 = txt.input(fot_33)
+
+#Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
+  #impulsi rot1
+  #impulsi rot2
+  #impulsi alzata sempre uguale...?
+scivoloPalline = []
+
+posizione11 = [] posizione12 = [] posizione13 = []
+posizione21 = [] posizione22 = [] posizione23 = []
+posizione31 = [] posizione32 = [] posizione33 = []
 
