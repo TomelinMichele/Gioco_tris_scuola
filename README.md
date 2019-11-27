@@ -9,7 +9,9 @@ e un doppio controllo txt
 # Sviluppato:
 
 >Inizio programmazione: novembre 2019
->        Fine :______
+>Fine : non ancora terminato
 
-# Cosa fa?
+
+# Licenza:
+> GNU 
 # 
