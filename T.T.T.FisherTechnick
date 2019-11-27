@@ -7,10 +7,9 @@ import numpy
 
 #Inutile
 __author__= "Tomelin Michele"
-__maintainer__ = "Tomelin Michele"
 __email__ = "tomelinmichele@gmail.com"
-__version__= "1"
-__status__= "In development"
+__version__= "1.0"
+__status__= "Sviluppamento"
 __date__= "23/11/2019"
 
 #Connessione al controller
@@ -102,6 +101,11 @@ inizia_umano=false
 
 init_finita= false
 
+isPosizioneDa11_a_13Libera=[false,false,false]
+isPosizioneDa21_a_23Libera=[false,false,false]
+isPosizioneDa31_a_33Libera=[false,false,false]
+
+
 #Tempo di attesa finito il quale la mossa passa al giocatore successivo
 #es: robot > umano e viceversa 
 #quando questo scade il giocatore successivo vince e la partita si conclude
@@ -172,6 +176,9 @@ def posizionaPallina()
     
      #DEPOSITO PALLINA
      spegniCalamita()
+     #POSIZIONE OCCUPATA
+        
+     #CONTROLLO SE PARTITA FINITA
     
 #----------------------------------------------------------------------------------------             
 
