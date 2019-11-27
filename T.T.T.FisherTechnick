@@ -20,51 +20,45 @@ txt = ftrobopy.ftrobopy('auto')
 # Dove sono collegate le varie componenti??
     #Controller dx= master = M
     #Controller sx= master = E
-
-# mot= motore
+    
+#Definizione componenti
+    # mot= motore
+    # lamp= lampadina
+    # btn= bottone/tasto    
+    # fot= fotocellula
 
 mot_alz_dx=1 #motore dx M
 mot_alz_sx=2 #motore sx M
-
 mot_int= 3 # M
 mot_est= 4 # M
 
-# lamp= lampadina
 lamp_rossa=5 # E
 lamp_verde=6 # E
-
 lamp_pareggio=3 #arancio E
-
 lamp_vince_robot=1 #bianca sx E
 lamp_vince_umano=2 #bianca dx E
 
-# btn= bottone/tasto
 btn_vince_robot=7 # M
 btn_vince_umano=8 # M
-
 btn_fine_corsa_alzata=1 #in basso M
-
 btn_fine_corsa_rot_int_dx=2 # M
 btn_fine_corsa_rot_int_sx=3 # M
-
 btn_fine_corsa_rot_est_dx=5 # M
 btn_fine_corsa_rot_est_sx=4 # M
 
-# fot= fotocellula
 
 fot_11= 6 # M
 fot_12= 7 # M
 fot_13= 8 # M
-
 fot_21= 1 # E
 fot_22= 2 # E
 fot_23= 3 # E
-
 fot_31= 4 # E
 fot_32= 5 # E
 fot_33= 6 # E
 
 #Dichiarazione
+
 motoreInterno = txt.motor(mot_int)
 motoreEsterno = txt.motor(mot_est)
 motoreAlzataDx = txt.motor(mot_alz_dx)
@@ -95,9 +89,9 @@ fotocellula_pos33 = txt.input(fot_33)
 #Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
   #impulsi rot1
   #impulsi rot2
-  #impulsi alzata sempre uguale...?
+  #impulsi alzata sempre uguale apparte per lo scivolo
+    
 scivoloPalline = []
-
 posizione11 = [] posizione12 = [] posizione13 = []
 posizione21 = [] posizione22 = [] posizione23 = []
 posizione31 = [] posizione32 = [] posizione33 = []
