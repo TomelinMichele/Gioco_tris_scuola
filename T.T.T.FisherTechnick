@@ -26,6 +26,7 @@ txt = ftrobopy.ftrobopy('auto')
     # lamp= lampadina
     # btn= bottone/tasto    
     # fot= fotocellula
+    # cal= Calamita
 
 mot_alz_dx=1 #motore dx M
 mot_alz_sx=2 #motore sx M
@@ -57,6 +58,8 @@ fot_31= 4 # E
 fot_32= 5 # E
 fot_33= 6 # E
 
+calamita= 6 # E
+
 #Dichiarazione
 
 motoreInterno = txt.motor(mot_int)
@@ -86,6 +89,29 @@ fotocellula_pos31 = txt.input(fot_31)
 fotocellula_pos32 = txt.input(fot_32)
 fotocellula_pos33 = txt.input(fot_33)
 
+calamita=txt.output(calamita)
+
+#Variabili booleane
+
+robot_ha_vinto=false
+umano_ha_vinto=false
+pareggio=false
+
+inizia_robot=false
+inizia_umano=false
+
+init_finita= false
+
+#Tempo di attesa finito il quale la mossa passa al giocatore successivo
+#es: robot > umano e viceversa 
+#quando questo scade il giocatore successivo vince e la partita si conclude
+
+turno_giocatore= 50
+
+#Lampadina e motori ON_OFF
+on=512
+off=0
+
 #Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
   #impulsi rot1
   #impulsi rot2
@@ -95,4 +121,74 @@ scivoloPalline = []
 posizione11 = [] posizione12 = [] posizione13 = []
 posizione21 = [] posizione22 = [] posizione23 = []
 posizione31 = [] posizione32 = [] posizione33 = []
+
+#Implementazione funzioni
+
+def accendiLampadina(lampadina l)
+    l.setLevel(on)
+    
+def spegniLampadina(lampadina l)
+    l.setLevel(off)
+    
+def lampeggioLampadina(lampadina l,lampeggi_max)
+    #Questa funzione passatogli un numero di lampeggi massimo e la lampadina
+    #fa lampeggiare quella lampadina n volte dove è il numero di lampeggi massimo
+     n= lampeggi_max
+    #inizio cliclo for...
+    for i in n
+        #ivocazione funzione
+        accendiLampadina(l)
+        #attesa
+        time.sleep(0.5)
+        spegniLampadina(l)
+        time.sleep(0.5)
+        
+#----------------------------------------------------------------------------------------             
+
+def motOff(motore m)
+   m.setSpeed(off)
+    
+def motOn(motore m)
+   m.setSpeed(on)  
+    
+#----------------------------------------------------------------------------------------             
+    
+def attivaCalamita()
+    calamita.setLevel(on)
+
+def spegniCalamita()
+    calamita.setLevel(off)
+    
+#----------------------------------------------------------------------------------------             
+    
+def prendiPallinaDalloScivolo()
+     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
+    
+     #RACCOGLIMENTO PALLINA
+     attivaCalamita()
+
+def posizionaPallina()
+     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
+    
+     #DEPOSITO PALLINA
+     spegniCalamita()
+    
+#----------------------------------------------------------------------------------------             
+
+def init()
+    #ALL'INIZIO I MOTORI SONO SPENTI
+    
+    #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
+    
+    #ACCENSIONE E SPEGNIMENTO LAMPADINA PER TOT SECONDI
+    lampeggioLampadina(lamp_rossa,10)
+    lampeggioLampadina(lamp_verde,10)
+    lampeggioLampadina(lamp_arancio,10)
+    lampeggioLampadina(lamp_bianca1,10)
+    lampeggioLampadina(lamp_bianca2,10)
+    #FINITA QUESTA FASE IL PROGRAMMA ATTENDE CHE L'UTENTE INIZI UNA NUOVA PARTITA...
+    init_finita= true
+    
+#------------------------------inizio programma------------------------------------------            
+
 
