@@ -5,7 +5,8 @@ import ftrobopy
 import time
 import numpy
 
-#Inutile
+#Dati....
+
 __author__= "Tomelin Michele"
 __email__ = "tomelinmichele@gmail.com"
 __version__= "1.0"
@@ -49,7 +50,7 @@ btn_fine_corsa_rot_est_sx=4 # M
 
 fot_11= 6 # M
 fot_12= 7 # M
-fot_13= 8 # M
+fot_13= 8 # m
 fot_21= 1 # E
 fot_22= 2 # E
 fot_23= 3 # E
@@ -100,10 +101,12 @@ inizia_robot=false
 inizia_umano=false
 
 init_finita= false
+nuova_partita= false
+partita_finita= false
 
-isPosizioneDa11_a_13Libera=[false,false,false]
-isPosizioneDa21_a_23Libera=[false,false,false]
-isPosizioneDa31_a_33Libera=[false,false,false]
+posizioneDa11_a_13Libera=[false,false,false]
+posizioneDa21_a_23Libera=[false,false,false]
+posizioneDa31_a_33Libera=[false,false,false]
 
 
 #Tempo di attesa finito il quale la mossa passa al giocatore successivo
@@ -117,11 +120,11 @@ on=512
 off=0
 
 #Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
-  #impulsi rot1
-  #impulsi rot2
+  #impulsi rot1 = interna
+  #impulsi rot2 = esterna
   #impulsi alzata sempre uguale apparte per lo scivolo
     
-scivoloPalline = []
+scivoloPalline = [0,0] #manca impulsi alzata
 posizione11 = [] posizione12 = [] posizione13 = []
 posizione21 = [] posizione22 = [] posizione23 = []
 posizione31 = [] posizione32 = [] posizione33 = []
@@ -150,10 +153,21 @@ def lampeggioLampadina(lampadina l,lampeggi_max)
 #----------------------------------------------------------------------------------------             
 
 def motOff(motore m)
+   #FERMO MOTORE
    m.setSpeed(off)
     
 def motOn(motore m)
-   m.setSpeed(on)  
+   #ACCENDO MOTORE
+   m.setSpeed(on) 
+    
+def muoviRotInt(impulsi i)
+   #MUOVO ROT INTERNA (ancora da fare)
+    
+def muoviRotEst(impulsi i)
+   #MUOVO ROT ESTERNA ( ancora da fare)
+    
+def muoviAlzata(impulsi i)
+   #MUOVO ALZATA (ancora da fare)
     
 #----------------------------------------------------------------------------------------             
     
@@ -166,27 +180,32 @@ def spegniCalamita()
 #----------------------------------------------------------------------------------------             
     
 def prendiPallinaDalloScivolo()
-     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
-    
-     #RACCOGLIMENTO PALLINA
+     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO (ancora da fare)
+     #RACCOGLIMENTO PALLINA (ancora da fare)
      attivaCalamita()
-
+#----------------------------------------------------------------------------------------   
+def isPosOccupata(x [])
+    return x []
+#----------------------------------------------------------------------------------------  
 def posizionaPallina()
-     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
-    
-     #DEPOSITO PALLINA
-     spegniCalamita()
-     #POSIZIONE OCCUPATA
-        
-     #CONTROLLO SE PARTITA FINITA
-    
+     prendiPallinaDalloScivolo()
+     #CONTROLLO CHE LA POS NON SIA OCCUPATA..
+     if(!isPosOccupata())
+        #SE "NO" POSIZIONAMENTO DEL BRACCIO (ancora da fare)
+         #DEPOSITO PALLINA
+         spegniCalamita()
+         #POSIZIONE OCCUPATA (ancora da fare)       
+         #CONTROLLO SE PARTITA FINITA (ancora da fare)
+     #ALTRIMENTI SCELGO NUO POS
+     elif()  
 #----------------------------------------------------------------------------------------             
-
 def init()
     #ALL'INIZIO I MOTORI SONO SPENTI
-    
-    #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO 
-    
+    motOff(motoreInterno)
+    motOff(motoreEsterno)
+    motOff(motoreAlzataDx)
+    motOff(motoreAlzataSx)
+    #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO (ancora da fare)
     #ACCENSIONE E SPEGNIMENTO LAMPADINA PER TOT SECONDI
     lampeggioLampadina(lamp_rossa,10)
     lampeggioLampadina(lamp_verde,10)
@@ -195,7 +214,10 @@ def init()
     lampeggioLampadina(lamp_bianca2,10)
     #FINITA QUESTA FASE IL PROGRAMMA ATTENDE CHE L'UTENTE INIZI UNA NUOVA PARTITA...
     init_finita= true
-    
+#----------------------------------------------------------------------------------------    
+ def richiestNuovaPartita()  
+    #( ancora da fare)
+#----------------------------------------------------------------------------------------    
+ def strategia() 
+    #(ancora da fare)
 #------------------------------inizio programma------------------------------------------            
-
-
