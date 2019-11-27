@@ -7,7 +7,8 @@ e un doppio controllo txt
 > Controller txt sinistro = Extension
 
 # Sviluppato:
->Inizio novembre 2019
+
+>Inizio programmazione: novembre 2019
 >Fine :______
 
 # Cosa fa?
