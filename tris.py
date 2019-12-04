@@ -4,6 +4,9 @@
 import ftrobopy
 import time
 
+# Connessione al controller
+txt = ftrobopy.ftrobopy('auto')
+
 #Dati....
 
 __author__= "Tomelin Michele,Luca Manini"
@@ -56,22 +59,14 @@ calamita = 6 # E
 
 # Dichiarazione
 
-motoreInterno = txt.motor(mot_int)
-motoreEsterno = txt.motor(mot_est)
-motoreAlzataDx = txt.motor(mot_alz_dx)
-motoreAlzataSx = txt.motor(mot_alz_sx)
+ALL_MOTORS = INT, EXT, ALZ_DX, ALZ_SX = range(4)
+motors = [txt.motor(mot) for mot in ALL_MOTORS]
 
-btnAlzata = txt.input(btn_fine_corsa_alzata)
-btnFCIntDx = txt.input(btn_fine_corsa_rot_int_dx)
-btnFCIntSx = txt.input(btn_fine_corsa_rot_int_sx)
-btnFCIEstDx = txt.input(btn_fine_corsa_rot_est_dx)
-btnFCIEstSx = txt.input(btn_fine_corsa_rot_est_sx)
+ALL_BUTTONS = ALZATA, INT_DX, INT_SX, EXT_DX, EXT_SX = range(5)
+buttons = [txt.input(but) for but in ALL_BUTTONS]
 
-lamp_rossa = txt.ouput(lamp_rossa)
-lamp_verde = txt.ouput(lamp_verde)
-lamp_arancio = txt.ouput(lamp_arancio)
-lamp_bianca1 = txt.ouput(lamp_bianca1)
-lamp_bianca2 = txt.ouput(lamp_bianca2)
+ALL_LAMP_COLORS = ROSSA, VERDE, ARANCIO, BIANCA_1, BIANCA_2 = range(5)
+lampadine = [txt.ouput(lamp) for lamp in ALL_LAMP_COLORS]
 
 fotocellule = {
     (1,1): txt.input(fot_11),
@@ -107,7 +102,7 @@ grid_state = {(r,c): FREE
               for c in range(3)}
 
 def is_pos_free(r, c):
-    return grid_state[(r,c)] =  =  FREE 
+    return grid_state[(r,c)] ==  FREE 
 
 def set_pos_state(r, c, state):
     assert state in ALL_STATES
@@ -129,7 +124,7 @@ off = 0
   #impulsi alzata sempre uguale apparte per lo scivolo
 
 SCI_POS = (9,9)
-movement_dic = dict(
+movement_dic = {
     (1,1): [1,2,3],  # (row, col):[rot_interna, rot_esterna, alzata]
     (1,2): [1,2,3],  # i, e, a = grid[(2,2)]
     (1,3): [1,2,3],
@@ -139,7 +134,8 @@ movement_dic = dict(
     (3,1): [1,2,3],
     (3,2): [1,2,3],
     (3,3): [1,2,3],
-    SCI_POS: [5,5,5],) # scivolo
+    SCI_POS: [5,5,5], # scivolo
+} 
 
 def get_movement(r, c):
     return movement_dic[(r, c)]
@@ -162,10 +158,10 @@ def lampeggio_lampadina(lamp, lamp_max, sleep_time=0.5):
         spegni_lampadina(lamp)
         time.sleep(sleep_time)
         
-def motOff(m):
+def mot_Off(m):
    m.stop()
     
-def motOn(m):
+def mot_On(m):
    m.setSpeed(on) 
 
 def muovi_to_row_col(r, c):
@@ -178,15 +174,15 @@ def muovi_rot_to_pos(i, e, a):
     muovi_alzata(a)
     
 def muovi_rot_int(i):
-    # MUOVO ROT INTERNA (ancora da fare)
+    # MUOVO ROT INTERNA TODO
     pass
     
 def muovi_rot_est(i):
-    # MUOVO ROT ESTERNA ( ancora da fare)
+    # MUOVO ROT ESTERNA TODO
     pass
     
 def muovi_alzata(i):
-    # MUOVO ALZATA (ancora da fare)
+    # MUOVO ALZATA TODO
     pass
     
 #----------------------------------------------------------------------------------------             
@@ -210,31 +206,29 @@ def posiziona_pallina(r, c):
     set_pos_state(r, c, FULL)
 
 def init():
-    # Connessione al controller
-    txt = ftrobopy.ftrobopy('auto')
 
     # emette un suono per segnalare l'inizio di questa fase
     # TODO
     
     # all'inizio i motori sono spenti
-    for o in (motoreInterno, motoreEsterno, motoreAlzataDx, motoreAlzataSx):
-        motOff(o)
+    for o in (motore_interno, motore_esterno, motore_alzata_dx, motore_alzata_sx):
+        mot_off(o)
     
     # comprende il posizionamento del braccio
-    # TODO
+    # todo
     
     # accensione e spegnimento lampadina per tot secondi
     for o in (lamp_rossa, lamp_verde, lamp_arancio, lamp_bianca1, lamp_bianca2):
-        lampeggioLampadina(o, 10)
+        lampeggio_lampadina(o, 10)
     
     # finita questa fase il programma attende che l'utente inizi una nuova partita...
     init_finita = true
     
-def richiestNuovaPartita():
-    #( ancora da fare)
+def richiesta_nuova_partita():
+    #TODO
     pass
 
 def strategia():
-    #(ancora da fare)
+    #TODO
     pass
-#-----------------------------inizio programma------------------------------------------            
+    
