@@ -10,6 +10,8 @@ Questo sw è stato implementato con lo scopo di far funzionare un robot scara re
 >Motori con encoder (Quantita 4)
 >Bottoni (Quantita 7)
 >Fotocellule (Quantita 9)
+# Componenti sw
+>tris_cli.py per provare manualmente il robot da cmd
 # Sviluppato:
 >Inizio programmazione: novembre 2019
 >Fine : non ancora terminato
