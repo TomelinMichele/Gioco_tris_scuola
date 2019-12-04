@@ -237,4 +237,4 @@ def richiestNuovaPartita():
 def strategia():
     #(ancora da fare)
     pass
------------------------------inizio programma------------------------------------------            
+#-----------------------------inizio programma------------------------------------------            
