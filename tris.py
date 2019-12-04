@@ -7,7 +7,7 @@ import numpy
 
 #Dati....
 
-__author__= "Tomelin Michele"
+__author__= "Tomelin Michele,Luca Manini"
 __email__ = "tomelinmichele@gmail.com"
 __version__= "1.0"
 __status__= "Sviluppamento"
@@ -154,7 +154,7 @@ def lampeggioLampadina(lampadina l,lampeggi_max)
 
 def motOff(motore m)
    #FERMO MOTORE
-   m.setSpeed(off)
+   m.stop()
     
 def motOn(motore m)
    #ACCENDO MOTORE
@@ -200,6 +200,8 @@ def posizionaPallina()
      elif()  
 #----------------------------------------------------------------------------------------             
 def init()
+    #EMETTE UN SUONO PER SEGNALARE L'INIZIO DI QUESTA FASE
+    
     #ALL'INIZIO I MOTORI SONO SPENTI
     motOff(motoreInterno)
     motOff(motoreEsterno)
