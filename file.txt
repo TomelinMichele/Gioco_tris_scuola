@@ -1,0 +1,5 @@
+File di testo in cui vengono salvati gli impulsi di 
+
+> alzata 
+> rot. interna
+> rot esterna
