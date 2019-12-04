@@ -3,7 +3,6 @@
 
 import ftrobopy
 import time
-import numpy
 
 #Dati....
 
@@ -13,10 +12,6 @@ __version__= "1.0"
 __status__= "Sviluppamento"
 __date__= "23/11/2019"
 
-#Connessione al controller
-USB = '192.168.7.2'
-txt = ftrobopy.ftrobopy('auto')
-
 # Dove sono collegate le varie componenti??
     #Controller dx= master = M
     #Controller sx= master = E
@@ -25,42 +20,41 @@ txt = ftrobopy.ftrobopy('auto')
     # mot= motore
     # lamp= lampadina
     # btn= bottone/tasto    
-    # fot= fotocellula
-    # cal= Calamita
+    # fot = fotocellula
+    # cal = Calamita
 
-mot_alz_dx=1 #motore dx M
-mot_alz_sx=2 #motore sx M
-mot_int= 3 # M
-mot_est= 4 # M
+mot_alz_dx = 1 #motore dx M
+mot_alz_sx = 2 #motore sx M
+mot_int = 3 # M
+mot_est = 4 # M
 
-lamp_rossa=5 # E
-lamp_verde=6 # E
-lamp_pareggio=3 #arancio E
-lamp_vince_robot=1 #bianca sx E
-lamp_vince_umano=2 #bianca dx E
+lamp_rossa = 5 # E
+lamp_verde = 6 # E
+lamp_pareggio = 3 #arancio E
+lamp_vince_robot = 1 #bianca sx E
+lamp_vince_umano = 2 #bianca dx E
 
-btn_vince_robot=7 # M
-btn_vince_umano=8 # M
-btn_fine_corsa_alzata=1 #in basso M
-btn_fine_corsa_rot_int_dx=2 # M
-btn_fine_corsa_rot_int_sx=3 # M
-btn_fine_corsa_rot_est_dx=5 # M
-btn_fine_corsa_rot_est_sx=4 # M
+btn_vince_robot = 7 # M
+btn_vince_umano = 8 # M
+btn_fine_corsa_alzata = 1 #in basso M
+btn_fine_corsa_rot_int_dx = 2 # M
+btn_fine_corsa_rot_int_sx = 3 # M
+btn_fine_corsa_rot_est_dx = 5 # M
+btn_fine_corsa_rot_est_sx = 4 # M
 
+fot_11 = 6 # M
+fot_12 = 7 # M
+fot_13 = 8 # m
+fot_21 = 1 # E
+fot_22 = 2 # E
+fot_23 = 3 # E
+fot_31 = 4 # E
+fot_32 = 5 # E
+fot_33 = 6 # E
 
-fot_11= 6 # M
-fot_12= 7 # M
-fot_13= 8 # m
-fot_21= 1 # E
-fot_22= 2 # E
-fot_23= 3 # E
-fot_31= 4 # E
-fot_32= 5 # E
-fot_33= 6 # E
+calamita = 6 # E
 
-calamita= 6 # E
-
-#Dichiarazione
+# Dichiarazione
 
 motoreInterno = txt.motor(mot_int)
 motoreEsterno = txt.motor(mot_est)
@@ -79,147 +73,168 @@ lamp_arancio = txt.ouput(lamp_arancio)
 lamp_bianca1 = txt.ouput(lamp_bianca1)
 lamp_bianca2 = txt.ouput(lamp_bianca2)
 
-fotocellula_pos11 = txt.input(fot_11)
-fotocellula_pos12 = txt.input(fot_12)
-fotocellula_pos13 = txt.input(fot_13)
-fotocellula_pos21 = txt.input(fot_21)
-fotocellula_pos22 = txt.input(fot_22)
-fotocellula_pos23 = txt.input(fot_23)
-fotocellula_pos31 = txt.input(fot_31)
-fotocellula_pos32 = txt.input(fot_32)
-fotocellula_pos33 = txt.input(fot_33)
+fotocellule = {
+    (1,1): txt.input(fot_11),
+    (1,2): txt.input(fot_12),
+    (1,3): txt.input(fot_13),
+    (2,1): txt.input(fot_21),
+    (2,2): txt.input(fot_22),
+    (2,3): txt.input(fot_23),
+    (3,1): txt.input(fot_31),
+    (3,2): txt.input(fot_32),
+    (3,3): txt.input(fot_33),
+}
 
-calamita=txt.output(calamita)
+calamita = txt.output(calamita)
 
 #Variabili booleane
 
-robot_ha_vinto=false
-umano_ha_vinto=false
-pareggio=false
+robot_ha_vinto = False
+umano_ha_vinto = False
+pareggio = False
 
-inizia_robot=false
-inizia_umano=false
+inizia_robot = False
+inizia_umano = False
 
-init_finita= false
-nuova_partita= false
-partita_finita= false
+init_finita = False
+nuova_partita = False
+partita_finita = False
 
-posizioneDa11_a_13Libera=[false,false,false]
-posizioneDa21_a_23Libera=[false,false,false]
-posizioneDa31_a_33Libera=[false,false,false]
+ALL_STATES = FREE, FULL = 0, 1
 
+grid_state = {(r,c): FREE
+              for r in range(3)
+              for c in range(3)}
 
-#Tempo di attesa finito il quale la mossa passa al giocatore successivo
-#es: robot > umano e viceversa 
-#quando questo scade il giocatore successivo vince e la partita si conclude
+def is_pos_free(r, c):
+    return grid_state[(r,c)] =  =  FREE 
 
-turno_giocatore= 50
+def set_pos_state(r, c, state):
+    assert state in ALL_STATES
+    grid_state[(r,c)] = state
+
+# Tempo di attesa finito il quale la mossa passa al giocatore
+# successivo es: robot > umano e viceversa quando questo scade il
+# giocatore successivo vince e la partita si conclude
+
+turno_giocatore = 50
 
 #Lampadina e motori ON_OFF
-on=512
-off=0
+on = 512
+off = 0
 
 #Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
   #impulsi rot1 = interna
   #impulsi rot2 = esterna
   #impulsi alzata sempre uguale apparte per lo scivolo
-    
-scivoloPalline = [0,0] #manca impulsi alzata
-posizione11 = [] posizione12 = [] posizione13 = []
-posizione21 = [] posizione22 = [] posizione23 = []
-posizione31 = [] posizione32 = [] posizione33 = []
+
+SCI_POS = (9,9)
+movement_dic = dict(
+    (1,1): [1,2,3],  # (row, col):[rot_interna, rot_esterna, alzata]
+    (1,2): [1,2,3],  # i, e, a = grid[(2,2)]
+    (1,3): [1,2,3],
+    (2,1): [1,2,3],
+    (2,2): [1,2,3],
+    (2,3): [1,2,3],
+    (3,1): [1,2,3],
+    (3,2): [1,2,3],
+    (3,3): [1,2,3],
+    SCI_POS: [5,5,5],) # scivolo
+
+def get_movement(r, c):
+    return movement_dic[(r, c)]
 
 #Implementazione funzioni
 
-def accendiLampadina(lampadina l)
-    l.setLevel(on)
+def accendi_lampadina(lamp):
+    lamp.setLevel(on)
     
-def spegniLampadina(lampadina l)
-    l.setLevel(off)
+def spegni_lampadina(lamp):
+    lamp.setLevel(off)
     
-def lampeggioLampadina(lampadina l,lampeggi_max)
-    #Questa funzione passatogli un numero di lampeggi massimo e la lampadina
-    #fa lampeggiare quella lampadina n volte dove è il numero di lampeggi massimo
-     n= lampeggi_max
-    #inizio cliclo for...
-    for i in n
-        #ivocazione funzione
-        accendiLampadina(l)
-        #attesa
-        time.sleep(0.5)
-        spegniLampadina(l)
-        time.sleep(0.5)
+def lampeggio_lampadina(lamp, lamp_max, sleep_time=0.5):
+    # Questa funzione passatogli un numero di lampeggi massimo e la
+    # lampadina fa lampeggiare quella lampadina n volte dove è il
+    # numero di lampeggi massimo
+    for _ in range(lamp_max):
+        accendi_lampadina(lamp)
+        time.sleep(sleep_time)
+        spegni_lampadina(lamp)
+        time.sleep(sleep_time)
         
-#----------------------------------------------------------------------------------------             
-
-def motOff(motore m)
-   #FERMO MOTORE
+def motOff(m):
    m.stop()
     
-def motOn(motore m)
-   #ACCENDO MOTORE
+def motOn(m):
    m.setSpeed(on) 
+
+def muovi_to_row_col(r, c):
+    i, e, a = get_movement(r,c)
+    muovi_rot_to_pos(i, e, a)
     
-def muoviRotInt(impulsi i)
-   #MUOVO ROT INTERNA (ancora da fare)
+def muovi_rot_to_pos(i, e, a):
+    muovi_rot_int(i)
+    muovi_rot_est(e)
+    muovi_alzata(a)
     
-def muoviRotEst(impulsi i)
-   #MUOVO ROT ESTERNA ( ancora da fare)
+def muovi_rot_int(i):
+    # MUOVO ROT INTERNA (ancora da fare)
+    pass
     
-def muoviAlzata(impulsi i)
-   #MUOVO ALZATA (ancora da fare)
+def muovi_rot_est(i):
+    # MUOVO ROT ESTERNA ( ancora da fare)
+    pass
+    
+def muovi_alzata(i):
+    # MUOVO ALZATA (ancora da fare)
+    pass
     
 #----------------------------------------------------------------------------------------             
     
-def attivaCalamita()
+def attiva_calamita():
     calamita.setLevel(on)
 
-def spegniCalamita()
+def spegni_calamita():
     calamita.setLevel(off)
     
 #----------------------------------------------------------------------------------------             
     
-def prendiPallinaDalloScivolo()
-     #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO (ancora da fare)
-     #RACCOGLIMENTO PALLINA (ancora da fare)
-     attivaCalamita()
-#----------------------------------------------------------------------------------------   
-def isPosOccupata(x [])
-    return x []
-#----------------------------------------------------------------------------------------  
-def posizionaPallina()
-     prendiPallinaDalloScivolo()
-     #CONTROLLO CHE LA POS NON SIA OCCUPATA..
-     if(!isPosOccupata())
-        #SE "NO" POSIZIONAMENTO DEL BRACCIO (ancora da fare)
-         #DEPOSITO PALLINA
-         spegniCalamita()
-         #POSIZIONE OCCUPATA (ancora da fare)       
-         #CONTROLLO SE PARTITA FINITA (ancora da fare)
-     #ALTRIMENTI SCELGO NUO POS
-     elif()  
-#----------------------------------------------------------------------------------------             
-def init()
-    #EMETTE UN SUONO PER SEGNALARE L'INIZIO DI QUESTA FASE
+def prendi_pallina_dallo_scivolo():
+    muovi_to_row_col(SCI_POS)
+    attiva_calamita()
     
-    #ALL'INIZIO I MOTORI SONO SPENTI
-    motOff(motoreInterno)
-    motOff(motoreEsterno)
-    motOff(motoreAlzataDx)
-    motOff(motoreAlzataSx)
-    #COMPRENDE IL POSIZIONAMENTO DEL BRACCIO (ancora da fare)
-    #ACCENSIONE E SPEGNIMENTO LAMPADINA PER TOT SECONDI
-    lampeggioLampadina(lamp_rossa,10)
-    lampeggioLampadina(lamp_verde,10)
-    lampeggioLampadina(lamp_arancio,10)
-    lampeggioLampadina(lamp_bianca1,10)
-    lampeggioLampadina(lamp_bianca2,10)
-    #FINITA QUESTA FASE IL PROGRAMMA ATTENDE CHE L'UTENTE INIZI UNA NUOVA PARTITA...
-    init_finita= true
-#----------------------------------------------------------------------------------------    
- def richiestNuovaPartita()  
+def posiziona_pallina(r, c):
+    prendi_pallina_dallo_scivolo()
+    muovi_to_row_col(r, c)
+    spegni_calamita()
+    set_pos_state(r, c, FULL)
+
+def init():
+    # Connessione al controller
+    txt = ftrobopy.ftrobopy('auto')
+
+    # emette un suono per segnalare l'inizio di questa fase
+    # TODO
+    
+    # all'inizio i motori sono spenti
+    for o in (motoreInterno, motoreEsterno, motoreAlzataDx, motoreAlzataSx):
+        motOff(o)
+    
+    # comprende il posizionamento del braccio
+    # TODO
+    
+    # accensione e spegnimento lampadina per tot secondi
+    for o in (lamp_rossa, lamp_verde, lamp_arancio, lamp_bianca1, lamp_bianca2):
+        lampeggioLampadina(o, 10)
+    
+    # finita questa fase il programma attende che l'utente inizi una nuova partita...
+    init_finita = true
+    
+def richiestNuovaPartita():
     #( ancora da fare)
-#----------------------------------------------------------------------------------------    
- def strategia() 
+    pass
+
+def strategia():
     #(ancora da fare)
-#------------------------------inizio programma------------------------------------------            
+    pass
+-----------------------------inizio programma------------------------------------------            
