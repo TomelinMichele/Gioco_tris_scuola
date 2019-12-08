@@ -246,3 +246,23 @@ def richiesta_nuova_partita():
 def strategia():
     #TODO
     pass
+
+#--------------------- funzioni per la Cli.. --------------------------------------------
+
+def alza():
+    #TODO
+    pass 
+
+def abbassa():
+    #TODO
+    pass 
+
+def gira_a_dx():
+    #TODO
+    pass 
+
+def gira_a_dx():
+    #TODO
+    pass 
+#----------------------------------------------------------------------------------------
+
