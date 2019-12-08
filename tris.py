@@ -126,6 +126,7 @@ LEVEL_OFF = 0
   #impulsi rot2 = esterna
   #impulsi alzata sempre uguale apparte per lo scivolo
 
+#TODO!! INIT_POS (sotto)
 SCI_POS = (9,9)
 movement_dic = {
     (1,1): [1,2,3],  # (row, col):[rot_interna, rot_esterna, alzata]
@@ -237,7 +238,7 @@ def init():
 
     # finita questa fase il programma attende che l'utente inizi una
     # nuova partita...
-    init_finita = true
+    init_finita = True
 
 def richiesta_nuova_partita():
     #TODO
