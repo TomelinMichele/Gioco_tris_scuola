@@ -23,8 +23,8 @@ class Cli(cmd.Cmd):
         self.boss = boss
         try:
             tris.init()
-        except:
-            print("tris.init() FAILED")
+        except Exception as e:
+            print(f"tris.init() FAILED with {e}")
 
     def do_save_pos(self, line):
         with open(pos_file, "w") as f:

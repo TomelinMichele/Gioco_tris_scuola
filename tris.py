@@ -215,7 +215,7 @@ def init():
     MOTORS = {e:txt.motor(e.value) for e in MotorsCodes}
 
     global LAMPS
-    LAMPS = {e:txt.ouput(e.value) for e in LampsCodes}
+    LAMPS = {e:txt.output(e.value) for e in LampsCodes}
 
     global BUTTONS
     BUTTONS = {e:txt.input(e.value) for e in ButtonsCodes}
@@ -225,6 +225,8 @@ def init():
 
     global CALAMITA
     CALAMITA = txt.output(calamita_code)
+
+    return
 
     # all'inizio i motori sono spenti
     for o in MOTORS.items():
