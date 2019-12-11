@@ -243,11 +243,11 @@ def init():
 def avvio_partita():
     #Controlla che qualcuno schiacci il pulsante del robot o dell'utente
     #per avviare una nuova partita
-    if(init_finita==True):
-        if(BUTTON[btn_inizia_robot].state () == 1):
+    if init_finita:
+        if BUTTON[btn_inizia_robot].state () == 1:
             #INIZIA A GIOCARE TODO
             strategia()
-        elif:
+        else:
             time.sleep(sleep_time)
             
 def strategia():
@@ -265,19 +265,19 @@ def attendi_il_tuo_turno():
 
 def alza(value):
     #TODO
-    print("Alza %d" % value)
+    print(f"Alza {value}")
 
 def abbassa(value):
     #TODO
-    print("Abbassa %d" % value)
+    print(f"Abbassa {value}")
 
-def gira_a_dx(value):
+def ruota_interno(value):
     #TODO
-    print("Gira %d" % value)
+    print(f"Ruota interno {value}")
 
-def gira_a_dx(value):
+def ruota_esterno(value):
     #TODO
-    print("Gira %d" % value)
+    print(f"Ruota esterno {value}")
 
 
 #----------------------------------------------------------------------------------------

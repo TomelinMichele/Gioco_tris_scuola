@@ -61,25 +61,25 @@ class Cli(cmd.Cmd):
         "Alza il motore"
         y = int(line.split()[0])
         cur_pos[0] += y
-        # tris.alza(y)
+        tris.alza(y)
 
     def do_abbassa(self, line):
         "Abbassa il motore"
         y = int(line.split()[0])
         cur_pos[0] -= y        
-        # tris.abbassa(y)
+        tris.abbassa(y)
 
     def do_ruota_interno(self, line):
         "Gira a destra il motore"
         y = int(line.split()[0])
         cur_pos[1] += y        
-        # tris.ruota_interno(y)
+        tris.ruota_interno(y)
 
     def do_ruota_esterno(self, line):
         "Gira a sinistra il motore"
         y = int(line.split()[0])
         cur_pos[2] += y        
-        # tris.ruota_esterno(y)
+        tris.ruota_esterno(y)
 
     def do_memorizza_pos(self, line):
         "Memorizza la posizione"
