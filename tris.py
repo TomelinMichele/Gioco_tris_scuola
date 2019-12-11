@@ -41,8 +41,8 @@ class LampsCodes(Enum):
 LAMPS = None       # will be set by init
 
 class ButtonsCodes(Enum):
-    btn_vince_robot = 7       # M
-    btn_vince_umano = 8       # M
+    btn_inizia_robot = 7       # M
+    btn_inizia_umano = 8       # M
     btn_fine_corsa_alzata = 1 # in basso M
     btn_fine_corsa_rot_int_dx = 2 # M
     btn_fine_corsa_rot_int_sx = 3 # M
@@ -54,7 +54,7 @@ BUTTONS = None     # will be set by init
 class PhotosCodes(Enum):
     photo_11 = 6 # M
     photo_12 = 7 # M
-    photo_13 = 8 # m
+    photo_13 = 8 # M
     photo_21 = 1 # E
     photo_22 = 2 # E
     photo_23 = 3 # E
@@ -128,6 +128,7 @@ LEVEL_OFF = 0
 
 #TODO!! INIT_POS (sotto)
 SCI_POS = (9,9)
+INIT_POS =(10,10)
 movement_dic = {
     (1,1): [1,2,3],  # (row, col):[rot_interna, rot_esterna, alzata]
     (1,2): [1,2,3],  # i, e, a = grid[(2,2)]
@@ -139,6 +140,7 @@ movement_dic = {
     (3,2): [1,2,3],
     (3,3): [1,2,3],
     SCI_POS: [5,5,5], # scivolo
+    INIT_POS:[6,7,8], #posizione iniziale braccio
 }
 
 def get_movement(r, c):
@@ -203,7 +205,6 @@ def posiziona_pallina(r, c):
     set_pos_state(r, c, FULL)
 
 def init():
-
     # emette un suono per segnalare l'inizio di questa fase
     # TODO
 
@@ -239,15 +240,27 @@ def init():
     # finita questa fase il programma attende che l'utente inizi una
     # nuova partita...
     init_finita = True
-
-def richiesta_nuova_partita():
-    #TODO
-    pass
-
+def avvio_partita():
+    #Controlla che qualcuno schiacci il pulsante del robot o dell'utente
+    #per avviare una nuova partita
+    if(init_finita==True):
+        if(BUTTON[btn_inizia_robot].state () == 1):
+            #INIZIA A GIOCARE TODO
+            strategia()
+        elif:
+            time.sleep(sleep_time)
+            
 def strategia():
     #TODO
     pass
-
+def blocca_mossa_avversario():
+    #TODO
+    pass
+def fai_la_tua_mossa():
+    #TODO
+    pass
+def attendi_il_tuo_turno():
+    time.sleep(turno_giocatore)
 #--------------------- funzioni per la Cli.. --------------------------------------------
 
 def alza(value):
