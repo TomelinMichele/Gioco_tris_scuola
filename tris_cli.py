@@ -10,6 +10,13 @@ class Cli(cmd.Cmd):
         self.prompt = "tris> "
         self.boss = boss
 
+    def onecmd(self, line):
+        try:
+            return super().onecmd(line)
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return False # don't stop
+
     def run(self):
         self.cmdloop()
 
