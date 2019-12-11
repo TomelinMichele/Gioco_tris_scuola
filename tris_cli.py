@@ -2,6 +2,15 @@
 import cmd
 import tris
 
+import os.path
+try:
+    import readline
+except ImportError:
+    readline = None
+
+hist_file = os.path.expanduser('~/.tris_history')
+hist_file_size = 1000
+
 class Cli(cmd.Cmd):
 
     def __init__(self, boss=None):
@@ -9,6 +18,15 @@ class Cli(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.prompt = "tris> "
         self.boss = boss
+
+    def preloop(self):
+        if readline and os.path.exists(hist_file):
+            readline.read_history_file(hist_file)
+
+    def postloop(self):
+        if readline:
+            readline.set_history_length(hist_file_size)
+            readline.write_history_file(hist_file)
 
     def onecmd(self, line):
         try:
