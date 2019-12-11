@@ -1,13 +1,13 @@
 # -*- coding:utf-8 -*-
 import cmd
-# import tris
+import tris
 
 class Cli(cmd.Cmd):
 
     def __init__(self, boss=None):
         f = open("file.txt", "w")
         cmd.Cmd.__init__(self)
-        self.prompt = "tris>"
+        self.prompt = "tris> "
         self.boss = boss
     
     def run(self):
@@ -35,18 +35,18 @@ class Cli(cmd.Cmd):
         y = int(line.split()[0])
         print("Gira %d" % y)
        
-   def do_gira_sx(self, line):
+    def do_gira_sx(self, line):
         "Gira a sinistra il motore"
         y = int(line.split()[0])
         print("Gira %d" % y)
         
-   def do_memorizza_pos(self, line):
+    def do_memorizza_pos(self, line):
         "Memorizza la posizione"
         y = int(line.split()[0])
         f.write(str(y))
         print("Posizione salvata")
         
-   def do_end(self):
+    def do_end(self):
         f.close()
         do_EOF()
   
