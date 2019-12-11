@@ -24,6 +24,8 @@ class Cli(cmd.Cmd):
         print("bye")
         return True
 
+    do_end = do_EOF             # alias for EOF/CRTL-d
+
     def emptyline(self):
         print(self.prompt)
 
@@ -53,9 +55,6 @@ class Cli(cmd.Cmd):
         f.write(str(y))
         print("Posizione salvata")
 
-    def do_end(self):
-        f.close()
-        do_EOF()
 
 if __name__ == "__main__":
 
