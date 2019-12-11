@@ -279,9 +279,14 @@ def ruota_esterno(value):
     #TODO
     print(f"Ruota esterno {value}")
 
+def lamp_by_name(name):
+    return LAMPS[LampsCodes[name]]
+
+def motor_by_name(name):
+    return MOTORS[MotorsCodes[name]]
+
 def lamp(lamp, state):
-    print(lamp)
-    lamp = LAMPS[LampsCodes[lamp]]
+    lamp = lamp_by_name(lamp)
     if state == "on":
         accendi_lampadina(lamp)
     else:
