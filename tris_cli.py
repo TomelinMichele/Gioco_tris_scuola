@@ -18,7 +18,6 @@ all_pos = dict()
 class Cli(cmd.Cmd):
 
     def __init__(self, boss=None):
-        f = open("file.txt", "w")
         cmd.Cmd.__init__(self)
         self.prompt = "tris> "
         self.boss = boss
