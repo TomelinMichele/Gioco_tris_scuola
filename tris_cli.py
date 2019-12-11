@@ -61,3 +61,8 @@ if __name__ == "__main__":
 
     c = Cli()
     c.run()
+
+# Local Variables:
+# tab-always-indent: nil
+# tab-width: 4
+# End:
