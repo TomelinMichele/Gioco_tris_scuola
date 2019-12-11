@@ -22,13 +22,17 @@ class Cli(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.prompt = "tris> "
         self.boss = boss
+        try:
+            tris.init()
+        except:
+            print("tris.init() FAILED")
 
     def do_save_pos(self, line):
         with open(pos_file, "w") as f:
             for k,v in all_pos.items():
                 v = " ".join(map(str, v))
                 f.write(f"{k} {v}\n")
-        
+
     def preloop(self):
         if readline and os.path.exists(hist_file):
             readline.read_history_file(hist_file)
@@ -66,19 +70,19 @@ class Cli(cmd.Cmd):
     def do_abbassa(self, line):
         "Abbassa il motore"
         y = int(line.split()[0])
-        cur_pos[0] -= y        
+        cur_pos[0] -= y
         tris.abbassa(y)
 
     def do_ruota_interno(self, line):
         "Gira a destra il motore"
         y = int(line.split()[0])
-        cur_pos[1] += y        
+        cur_pos[1] += y
         tris.ruota_interno(y)
 
     def do_ruota_esterno(self, line):
         "Gira a sinistra il motore"
         y = int(line.split()[0])
-        cur_pos[2] += y        
+        cur_pos[2] += y
         tris.ruota_esterno(y)
 
     def do_memorizza_pos(self, line):
@@ -103,13 +107,13 @@ class Cli(cmd.Cmd):
             return ss.copy()
         cc = [s for s in ss if s.startswith(text)]
         return cc
-        
+
     def do_lamp(self, line):
         lamp, state = line.split()
         print(f"tris.lamp({lamp}, {state})")
-        
+        tris.lamp(lamp, state)
+
 if __name__ == "__main__":
 
     c = Cli()
     c.run()
-

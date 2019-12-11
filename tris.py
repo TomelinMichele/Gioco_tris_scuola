@@ -214,8 +214,8 @@ def init():
     global MOTORS
     MOTORS = {e:txt.motor(e.value) for e in MotorsCodes}
 
-    global LAMP
-    LAMP = {e:txt.ouput(e.value) for e in LampsCodes}
+    global LAMPS
+    LAMPS = {e:txt.ouput(e.value) for e in LampsCodes}
 
     global BUTTONS
     BUTTONS = {e:txt.input(e.value) for e in ButtonsCodes}
@@ -227,14 +227,14 @@ def init():
     CALAMITA = txt.output(calamita_code)
 
     # all'inizio i motori sono spenti
-    for o in MOTORS:
+    for o in MOTORS.items():
         mot_off(o)
 
     # comprende il posizionamento del braccio ???
     # TODO
 
     # accensione e spegnimento lampadina per tot secondi
-    for o in LAMPS:
+    for o in LAMPS.items():
         lampeggio_lampadina(o, 10)
 
     # finita questa fase il programma attende che l'utente inizi una
@@ -249,7 +249,7 @@ def avvio_partita():
             strategia()
         else:
             time.sleep(sleep_time)
-            
+
 def strategia():
     #TODO
     pass
@@ -279,5 +279,12 @@ def ruota_esterno(value):
     #TODO
     print(f"Ruota esterno {value}")
 
+def lamp(lamp, state):
+    print(lamp)
+    lamp = LAMPS[LampsCodes[lamp]]
+    if state == "on":
+        accendi_lampadina(lamp)
+    else:
+        spegni_lampadina(lamp)
 
 #----------------------------------------------------------------------------------------
