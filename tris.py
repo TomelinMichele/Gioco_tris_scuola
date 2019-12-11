@@ -250,20 +250,21 @@ def strategia():
 
 #--------------------- funzioni per la Cli.. --------------------------------------------
 
-def alza():
+def alza(value):
     #TODO
-    pass 
+    print("Alza %d" % value)
 
-def abbassa():
+def abbassa(value):
     #TODO
-    pass 
+    print("Abbassa %d" % value)
 
-def gira_a_dx():
+def gira_a_dx(value):
     #TODO
-    pass 
+    print("Gira %d" % value)
 
-def gira_a_dx():
+def gira_a_dx(value):
     #TODO
-    pass 
+    print("Gira %d" % value)
+
+
 #----------------------------------------------------------------------------------------
-
