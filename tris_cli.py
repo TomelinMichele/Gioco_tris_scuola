@@ -26,19 +26,36 @@ class Cli(cmd.Cmd):
         except Exception as e:
             print(f"tris.init() FAILED with {e}")
 
+    def do_set_pos(self, line):
+        k, *vv = line.split()
+        assert len(vv) == 3, "set_pos needs one name and three ints."
+        all_pos[k] = list(map(int, vv))
+        print(all_pos)
+
     def do_save_pos(self, line):
         with open(pos_file, "w") as f:
             for k,v in all_pos.items():
                 v = " ".join(map(str, v))
                 f.write(f"{k} {v}\n")
 
-    def do_show_pos(self, line):
-        s = line and line.split()[0] or ""
+    def do_load_pos(self, line):
+        all_pos.clear()
         with open(pos_file) as f:
             for r in f:
                 k, *v = r.split()
+                all_pos[k] = v
+
+    def do_show_pos(self, line):
+        s = line and line.split()[0] or ""
+        for k, v in all_pos.items():
                 if not s or s == k:
-                    print(r)
+                    print(k, *v)
+
+    def complete_show_pos(self, text, line, begidx, endidx):
+        kk = list(all_pos.keys())
+        if not text:
+            return kk
+        return [k for k in kk if k.startswith(text)]
 
     def preloop(self):
         if readline and os.path.exists(hist_file):
