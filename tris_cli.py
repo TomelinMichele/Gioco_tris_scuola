@@ -32,6 +32,14 @@ class Cli(cmd.Cmd):
                 v = " ".join(map(str, v))
                 f.write(f"{k} {v}\n")
 
+    def do_show_pos(self, line):
+        s = line and line.split()[0] or ""
+        with open(pos_file) as f:
+            for r in f:
+                k, *v = r.split()
+                if not s or s == k:
+                    print(r)
+
     def preloop(self):
         if readline and os.path.exists(hist_file):
             readline.read_history_file(hist_file)
