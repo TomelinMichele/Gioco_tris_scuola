@@ -27,18 +27,21 @@ class Cli(cmd.Cmd):
             print(f"tris.init() FAILED with {e}")
 
     def do_set_pos(self, line):
+        "Add named position, like 'set_pos foo 100 -30 50"
         k, *vv = line.split()
         assert len(vv) == 3, "set_pos needs one name and three ints."
         all_pos[k] = list(map(int, vv))
         print(all_pos)
 
     def do_save_pos(self, line):
+        "Save all positions to file"
         with open(pos_file, "w") as f:
             for k,v in all_pos.items():
                 v = " ".join(map(str, v))
                 f.write(f"{k} {v}\n")
 
     def do_load_pos(self, line):
+        "Load positions from file"
         all_pos.clear()
         with open(pos_file) as f:
             for r in f:
@@ -46,6 +49,7 @@ class Cli(cmd.Cmd):
                 all_pos[k] = v
 
     def do_show_pos(self, line):
+        "Show given/all positions"
         s = line and line.split()[0] or ""
         for k, v in all_pos.items():
                 if not s or s == k:
