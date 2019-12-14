@@ -116,10 +116,8 @@ def set_pos_state(r, c, state):
 turno_giocatore = 50
 
 #Lampadina e motori ON_OFF
-SPEED_ON = 512
-SPEED_OFF = 0
-LEVEL_ON = 512
-LEVEL_OFF = 0
+SPEED_ON = LEVEL_ON = 512
+SPEED_OFF = LEVEL_OFF = 0
 
 #Coordinate: posizioni scacchiera e scivolo le coordinate sono 3 :
   #impulsi rot1 = interna
@@ -209,8 +207,9 @@ def init():
     # TODO
 
     import ftrobopy
-    txt = ftrobopy.ftrobopy('auto')
-
+    txt = ftrobopy.ftrobopy('auto')    # MASTER
+    # txt2 = ftrobopy.ftrobopy('auto') EXTENSION
+    
     global MOTORS
     MOTORS = {e:txt.motor(e.value) for e in MotorsCodes}
 
@@ -234,6 +233,7 @@ def init():
 
     # comprende il posizionamento del braccio ???
     # TODO
+    # mow_to_row_col(SCI_POS)
 
     # accensione e spegnimento lampadina per tot secondi
     for o in LAMPS.items():
@@ -261,9 +261,10 @@ def blocca_mossa_avversario():
 def fai_la_tua_mossa():
     #TODO
     pass
+
 def attendi_il_tuo_turno():
     time.sleep(turno_giocatore)
-#--------------------- funzioni per la Cli.. --------------------------------------------
+#--------------------- funzioni da usare dalla Cli per provare il braccio.. --------------------------------------------
 
 def alza(value):
     #TODO
@@ -293,5 +294,4 @@ def lamp(lamp, state):
         accendi_lampadina(lamp)
     else:
         spegni_lampadina(lamp)
-
 #----------------------------------------------------------------------------------------
