@@ -1,8 +1,9 @@
 # Progetto scuola Tris
-Questo è il programma realizzato in python con l'utilizzo della libreria ftrobopy.
+Progetto scolastico iniziato nell'anno 2019/2020 durante le ore di robotica pomeridiane all'istituto Marie Curie di Pergine V (TN)
+Programma realizzato in Python con l'ausilio della libreria "ftrobopy"
 # Obiettivo: 
-Questo sw è stato implementato con lo scopo di far funzionare un robot scara realizzato con pezzi della FisherTechnik
-# Componenti
+Programmare in linguaggio python un robot tipo "Scara" realizzato con i pezzi di FischerTechnik
+# Componenti utilizzati
 >Elettrocalamita (Quantita 1)
 > Controller txt (Quantita 2)
 >Encoder (Quantita 3)
@@ -10,9 +11,8 @@ Questo sw è stato implementato con lo scopo di far funzionare un robot scara re
 >Motori con encoder (Quantita 4)
 >Bottoni (Quantita 7)
 >Fotocellule (Quantita 9)
-# Componenti sw
->tris_cli.py per provare manualmente il robot da cmd
-# Sviluppato:
+>Altro [...]
+#Stato progetto: TO DO
 >Inizio programmazione: novembre 2019
 >Fine : non ancora terminato
 # Licenza:
