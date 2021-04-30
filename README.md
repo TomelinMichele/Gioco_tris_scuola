@@ -12,7 +12,7 @@ Programmare in linguaggio python un robot tipo "Scara" realizzato con i pezzi di
 >Bottoni (Quantita 7)
 >Fotocellule (Quantita 9)
 >Altro [...]
-#Stato progetto: TO DO
+# Stato progetto: TO DO
 >Inizio programmazione: novembre 2019
 >Fine : non ancora terminato
 # Licenza:
